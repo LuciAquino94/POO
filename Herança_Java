@@ -39,3 +39,21 @@ public class Lista {
     }
   
   }
+
+class Main {
+  public static void main(String[] args) {
+    int i;
+    Lista lista = new Lista();
+    lista.insere(1);
+    lista.insere(2);
+    lista.insere(3);
+    lista.insere(6);
+    lista.insere(8);
+    lista.retira();
+
+    System.out.println("Primeiro: " + lista.primeiro());
+    System.out.println("Último: " + lista.ultimo());
+    System.out.println("Tamanho da lista: " + lista.size());
+   
+  }
+}
