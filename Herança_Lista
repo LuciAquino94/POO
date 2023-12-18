@@ -1,0 +1,153 @@
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+struct t_no{
+    int id;
+    struct t_no *prox;
+} typedef no;
+
+class Lista_ {
+public:
+    virtual void imprimir() = 0;
+    virtual void buscar(int n) = 0;
+    virtual void inserir(int id) = 0;
+    virtual void excluir(int id) = 0;
+    virtual void size() = 0;
+};
+
+class Lista : public Lista_ {
+protected:
+    no *cabeca;
+
+public:
+    Lista() {
+        cabeca = NULL;
+    }
+
+    void imprimir() override {
+        no *aux = cabeca;
+        while (aux != NULL) {
+            cout << aux->id << endl;
+            aux = aux->prox;
+        }
+    }
+
+    void buscar(int n) override {
+        no *aux = cabeca;
+        while (aux != NULL) {
+            if (aux->id == n) {
+                cout << "numero encontrado: " << n << endl;
+                return;
+            } else {
+                aux = aux->prox;
+            }
+        }
+        cout << "nao encontrado" << endl;
+    }
+
+    void inserir(int id) override {
+        no *aux = (no*)malloc(sizeof(no));
+        no *temp = NULL;
+        aux->id = id;
+        aux->prox = NULL;
+        if (cabeca == NULL) {
+            cabeca = aux;
+        } else {
+            temp = cabeca;
+            while (temp->prox != NULL) {
+                temp = temp->prox;
+            }
+            temp->prox = aux;
+        }
+    }
+
+    void excluir(int id) override {
+        no *temp = cabeca;
+        no *ant = NULL;
+        while (temp != NULL) {
+            if (temp->id == id) {
+                if (ant != NULL) {
+                    ant->prox = temp->prox;
+                } else {
+                    cabeca = temp->prox;
+                }
+                free(temp);
+            } else {
+                ant = temp;
+                temp = temp->prox;
+            }
+        }
+    }
+
+    void size() override {
+        no *aux = cabeca;
+        int acum = 0;
+        while (aux != NULL) {
+            acum++;
+            aux = aux->prox;
+        }
+        cout << "tamanho = " << acum << endl;
+    }
+};
+
+class Pilha : public Lista {
+public:
+    void push(int id) {
+        inserir(id);
+    }
+
+    void pop() {
+        if (cabeca != NULL) {
+            no *temp = cabeca;
+            cabeca = cabeca->prox;
+            free(temp);
+        }
+    }
+};
+
+class Fila : public Lista {
+public:
+    void enqueue(int id) {
+        inserir(id);
+    }
+
+    void dequeue() {
+        if (cabeca != NULL) {
+            no *temp = cabeca;
+            cabeca = cabeca->prox;
+            free(temp);
+        }
+    }
+};
+
+int main() {
+    Pilha pilha;
+    Fila fila;
+
+    cout << "\nPILHA" << endl;
+    pilha.push(10);
+    pilha.push(5);
+    pilha.push(20);
+    pilha.push(30);
+
+    pilha.imprimir();
+    pilha.size();
+    cout << "->pop " << endl;
+    pilha.pop();
+    pilha.imprimir();
+    pilha.size();
+
+    cout << "\nFILA" << endl;
+    fila.enqueue(10);
+    fila.enqueue(5);
+    fila.enqueue(20);
+    fila.size();
+    fila.imprimir();
+    fila.dequeue();
+    cout << "teste" << endl;
+    fila.imprimir();
+
+    return 0;
+}
