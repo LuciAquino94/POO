@@ -1,0 +1,41 @@
+import java.util.Collection;
+import java.util.ArrayList;
+import java.util.LinkedList;
+
+public class Lista {
+    private LinkedList<Integer> lista;
+
+    public Lista() {
+        lista = new LinkedList<>();
+    }
+
+    public void insere(int v) {
+        lista.add(v);
+    }
+
+    public void retira() {
+        if (lista.isEmpty()) {
+            throw new IllegalStateException("A lista está vazia");
+        }
+        lista.removeLast();
+    }
+
+    public int primeiro() {
+        if (lista.isEmpty()) {
+            throw new IllegalStateException("A lista está vazia");
+        }
+        return lista.getFirst();
+    }
+
+    public int ultimo() {
+        if (lista.isEmpty()) {
+            throw new IllegalStateException("A lista está vazia");
+        }
+        return lista.getLast();
+    }
+
+    public int size() {
+        return lista.size();
+    }
+  
+  }
