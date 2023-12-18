@@ -3,13 +3,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Lista {
-    private LinkedList<Integer> lista;
+    private final LinkedList<Integer> lista;
 
     public Lista() {
         lista = new LinkedList<>();
     }
 
-    public void insere(int v) {
+    public void insere(final int v) {
         lista.add(v);
     }
 
@@ -37,23 +37,82 @@ public class Lista {
     public int size() {
         return lista.size();
     }
-  
+
+  };
+
+ class Pilha extends Lista {
+    public Pilha() {
+        super();
+    }
+
+    @Override
+    public void insere(final int v) {
+        super.insere(v);
+    }
+
+    @Override
+    public void retira() {
+        super.retira();
+    }
+
+    @Override
+    public int primeiro() {
+        return super.primeiro();
+    }
+
+    @Override
+    public int ultimo() {
+        return super.ultimo();
+    }
+
+    @Override
+    public int size() {
+        return super.size();
+    }
+}
+
+class Fila extends Lista {
+    public void insere(final int v) {
+        super.insere(v);
+    }
+
+    public void retira() {
+        super.retira();
+    }
+
+    @Override
+    public int primeiro() {
+      return super.primeiro();
   }
+
+    @Override
+    public int ultimo() {
+      return super.ultimo();
+  }
+
+    @Override
+    public int size() {
+      return super.size();
+  }
+}
 
 class Main {
   public static void main(String[] args) {
-    int i;
-    Lista lista = new Lista();
-    lista.insere(1);
-    lista.insere(2);
-    lista.insere(3);
-    lista.insere(6);
-    lista.insere(8);
-    lista.retira();
+  Fila fila = new Fila();
+  fila.insere(1);
+  fila.insere(2);
+  fila.insere(3);
+  fila.retira();
 
-    System.out.println("Primeiro: " + lista.primeiro());
-    System.out.println("Último: " + lista.ultimo());
-    System.out.println("Tamanho da lista: " + lista.size());
-   
+  Pilha pilha = new Pilha();
+    pilha.insere(1);
+    pilha.insere(8);
+    pilha.insere(3);
+    pilha.insere(8);
+    pilha.retira();
+
+    System.out.println("Primeiro: " + pilha.primeiro());
+    System.out.println("Último: " + pilha.ultimo());
+    System.out.println("Tamanho da pilha: " + pilha.size());
   }
 }
